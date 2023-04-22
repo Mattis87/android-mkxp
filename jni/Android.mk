@@ -18,7 +18,6 @@ include $(L_PATH)/SDL_ttf/Android.mk
 include $(L_PATH)/SDL_image/Android.mk
 include $(L_PATH)/SDL_sound.mk
 
-include $(L_PATH)/boost.program_options/Android.mk
 include $(L_PATH)/fluidsynth/Android.mk
 include $(L_PATH)/glib/Android.mk
 include $(L_PATH)/libsigc++/Android.mk
