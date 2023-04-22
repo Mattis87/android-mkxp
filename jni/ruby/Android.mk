@@ -89,7 +89,6 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/missing/setproctitle.c \
 	$(LOCAL_PATH)/missing/strlcat.c \
 	$(LOCAL_PATH)/missing/strlcpy.c \
-	$(LOCAL_PATH)/missing/ffs.c \
 	$(LOCAL_PATH)/missing/crypt.c \
 	$(LOCAL_PATH)/addr2line.c \
 	$(LOCAL_PATH)/dmyext.c \

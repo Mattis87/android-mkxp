@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:8.0.0'
     }
 }
 allprojects {
@@ -26,11 +26,12 @@ apply plugin: 'com.android.application'
 
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
 }
 
 android {
-    compileSdkVersion 28
+    namespace 'org.ancurio.mkxp'
+    compileSdkVersion 33
     buildToolsVersion '28.0.3'
     sourceSets {
         main {
@@ -46,6 +47,16 @@ android {
     }
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 33
+        externalNativeBuild {
+            ndkBuild {
+                cppFlags ''
+            }
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path file('jni/Android.mk')
+        }
     }
 }

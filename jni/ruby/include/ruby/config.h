@@ -198,7 +198,7 @@
 #define HAVE_CBRT 1
 #define HAVE_DUP2 1
 #define HAVE_ERF 1
-#undef HAVE_FFS
+#define HAVE_FFS 1
 #define HAVE_FINITE 1
 #define HAVE_FLOCK 1
 #define HAVE_HYPOT 1

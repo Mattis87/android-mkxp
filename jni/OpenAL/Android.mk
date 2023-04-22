@@ -15,7 +15,7 @@ else ifeq ($(TARGET_ARCH_ABI), mips)
 	LOCAL_CFLAGS += -DARCH_32BIT
 endif
 
-LOCAL_MODULE:= OpenAL
+LOCAL_MODULE:= openal
 MAX_SOURCES_LOW ?= 4
 MAX_SOURCES_START ?= 8
 MAX_SOURCES_HIGH ?= 64
@@ -53,6 +53,6 @@ LOCAL_SRC_FILES :=  \
                     $(LOCAL_PATH)/Alc/audiotrack.c           \
 		    $(LOCAL_PATH)/Alc/opensles.c
 
-#LOCAL_LDLIBS := -llog
-include $(BUILD_STATIC_LIBRARY)
+LOCAL_LDLIBS := -llog
+include $(BUILD_SHARED_LIBRARY)
 

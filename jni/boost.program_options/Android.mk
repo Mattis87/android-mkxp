@@ -1,5 +1,9 @@
 LOCAL_PATH:= $(call my-dir)
+
 include $(CLEAR_VARS)
+
+LOCAL_CPPFLAGS:=-O3 -frtti -fexceptions
+
 LOCAL_MODULE:= boost_program_options
 LOCAL_SRC_FILES:=cmdline.cpp \
 	config_file.cpp \

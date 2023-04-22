@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)/mkxp
 include $(CLEAR_VARS)
 
 LOCAL_MODULE:= mkxp
-LOCAL_CPPFLAGS:=-DSHARED_FLUID -DGLES2_HEADER -O3
+LOCAL_CPPFLAGS:=-DSHARED_FLUID -DGLES2_HEADER -O3 -fexceptions
 
 ifeq ($(TARGET_ARCH_ABI), armeabi)
 	LOCAL_CPPFLAGS += -DARCH_32BIT
@@ -14,12 +14,21 @@ else ifeq ($(TARGET_ARCH_ABI), mips)
 	LOCAL_CPPFLAGS += -DARCH_32BIT
 endif
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../OpenAL $(LOCAL_PATH)/../SDL_sound \
-	$(LOCAL_PATH)/../libsigc++ $(LOCAL_PATH) \
-	$(LOCAL_PATH)/../boost_headers $(LOCAL_PATH)/../pixman-extra \
-	$(LOCAL_PATH)/../OpenAL/include/AL $(LOCAL_PATH)/../physfs/src \
-	$(LOCAL_PATH)/../vorbis-include $(LOCAL_PATH)/src $(LOCAL_PATH)/shader \
-	$(LOCAL_PATH)/assets $(LOCAL_PATH)/../ruby/include $(LOCAL_PATH)/../fluidsynth/include
+LOCAL_C_INCLUDES := \
+	$(LOCAL_PATH) \
+	$(LOCAL_PATH)/../OpenAL/include \
+	$(LOCAL_PATH)/../SDL_sound \
+	$(LOCAL_PATH)/../libsigc++ \
+	$(LOCAL_PATH)/../boost_headers \
+	$(LOCAL_PATH)/../pixman-extra \
+	$(LOCAL_PATH)/../physfs/src \
+	$(LOCAL_PATH)/../vorbis-include \
+	$(LOCAL_PATH)/../ruby/include \
+	$(LOCAL_PATH)/../fluidsynth/include \
+	$(LOCAL_PATH)/src \
+	$(LOCAL_PATH)/shader \
+	$(LOCAL_PATH)/assets
+
 LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/src/main.cpp \
 	$(LOCAL_PATH)/src/audio.cpp \
@@ -84,7 +93,7 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/binding-mri/windowvx-binding.cpp \
 	$(LOCAL_PATH)/binding-mri/tilemapvx-binding.cpp \
 
-LOCAL_STATIC_LIBRARIES:=vorbis physfs sigc++ pixman boost_program_options ruby SDL2_static SDL2_ttf SDL2_sound SDL2_image ogg OpenAL
-LOCAL_SHARED_LIBRARIES:=mkxp_wrapper fluidsynth
+LOCAL_STATIC_LIBRARIES:=vorbis physfs sigc++ pixman boost_program_options ruby SDL2_static SDL2_ttf SDL2_sound SDL2_image ogg
+LOCAL_SHARED_LIBRARIES:=mkxp_wrapper openal fluidsynth
 LOCAL_LDLIBS:=-lz -llog -ldl -lm -lOpenSLES
 include $(BUILD_SHARED_LIBRARY)

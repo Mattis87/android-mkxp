@@ -17,6 +17,7 @@ LOCAL_SRC_FILES:= $(LOCAL_PATH)/src/physfs.c \
 	$(LOCAL_PATH)/src/physfs_archiver_wad.c \
 	$(LOCAL_PATH)/src/physfs_archiver_zip.c \
 	$(LOCAL_PATH)/src/physfs_byteorder.c \
+	$(LOCAL_PATH)/src/physfs_platform_android.c \
 	$(LOCAL_PATH)/src/physfs_platform_haiku.cpp \
 	$(LOCAL_PATH)/src/physfs_platform_os2.c \
 	$(LOCAL_PATH)/src/physfs_platform_posix.c \
