@@ -22,3 +22,6 @@
 [submodule "jni/SDL_sound"]
 	path = jni/SDL_sound
 	url = https://github.com/Ancurio/SDL_sound.git
+[submodule "jni/openal-soft"]
+	path = jni/openal-soft
+	url = https://github.com/kcat/openal-soft
