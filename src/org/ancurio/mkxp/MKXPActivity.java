@@ -5,6 +5,7 @@ import org.libsdl.app.SDLActivity;
 
 public class MKXPActivity extends SDLActivity
 {
+    @Override
     protected String[] getArguments() {
         return new String[]{this.getConfPath()};
     }
