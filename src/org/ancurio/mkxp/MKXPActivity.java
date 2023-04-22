@@ -26,19 +26,24 @@ public class MKXPActivity extends SDLActivity
         return new String[]{
             this.getGameDirectory(),
             String.join(",", this.getRTPPaths()) + ",",
+            this.getScriptsRelativePath(),
         };
     }
 
-    public String getGameDirectory(){
+    private String getGameDirectory(){
         return getObbDir().getPath();
     }
 
-    public String[] getRTPPaths() {
+    private String[] getRTPPaths() {
         return new String[] {
-            "obb_type_main.2000028.obb",
-            "obb_type_patch.2000028.obb",
-            "ScriptsNew.zip",
+            getObbDir() + "/obb_type_main.2000028.obb",
+            getObbDir() + "/obb_type_patch.2000028.obb",
+            getObbDir() + "/ScriptsNew.zip",
         };
+    }
+
+    private String getScriptsRelativePath() {
+        return "ScriptsNew.rxdata";
     }
 
     public void onCreate(Bundle savedInstanceState){
