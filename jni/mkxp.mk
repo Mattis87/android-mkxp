@@ -16,7 +16,7 @@ endif
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH) \
-	$(LOCAL_PATH)/../OpenAL/include \
+	$(LOCAL_PATH)/../openal-soft/include \
 	$(LOCAL_PATH)/../SDL_sound \
 	$(LOCAL_PATH)/../libsigc++ \
 	$(LOCAL_PATH)/../boost_headers \
