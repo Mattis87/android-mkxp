@@ -14,21 +14,31 @@ public class MKXPActivity extends SDLActivity
     ButtonMappingManager.InputLayout inputLayout;
 
     @Override
-    protected String[] getArguments() {
-        return new String[]{
-            this.getConfPath(),
-        };
-    }
-
-    @Override
     protected String[] getLibraries() {
         return new String[] {
                 "openal",
                 "mkxp",
         };
     }
-    public String getConfPath(){
+
+    @Override
+    protected String[] getArguments() {
+        return new String[]{
+            this.getGameDirectory(),
+            String.join(",", this.getRTPPaths()) + ",",
+        };
+    }
+
+    public String getGameDirectory(){
         return getObbDir().getPath();
+    }
+
+    public String[] getRTPPaths() {
+        return new String[] {
+            "obb_type_main.2000028.obb",
+            "obb_type_patch.2000028.obb",
+            "ScriptsNew.zip",
+        };
     }
 
     public void onCreate(Bundle savedInstanceState){
