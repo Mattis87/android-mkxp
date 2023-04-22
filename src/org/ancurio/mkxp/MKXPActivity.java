@@ -11,10 +11,12 @@ import org.ancurio.button_mapping.Helper;
 import org.ancurio.button_mapping.VirtualButton;
 import org.libsdl.app.SDLActivity;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class MKXPActivity extends SDLActivity
 {
@@ -25,21 +27,31 @@ public class MKXPActivity extends SDLActivity
 
     /** Configure for RTP assets */
     protected String[] getRTPPaths() {
-        return new String[] {
-            getObbDir() + "/obb_type_main.2000028.obb",
-            getObbDir() + "/obb_type_patch.2000028.obb",
-        };
+        ArrayList<String> rtps = new ArrayList();
+
+        // Add all OBB files for this app
+        File obbDirFile = getObbDir();
+        File[] obbFiles = obbDirFile.listFiles();
+        if (obbFiles != null) {
+            for (File obbFile : obbFiles) {
+                if (obbFile.isFile() && obbFile.getName().toLowerCase().endsWith(".obb")) {
+                    rtps.add(obbFile.getAbsolutePath());
+                }
+            }
+        }
+
+        return rtps.toArray(new String[0]);
     }
 
     /** Configure for Scripts.rxdata */
     protected String getScriptsRelativePath() {
-        return "ScriptsNew.rxdata";
+        return "GameScripts.rxdata";
     }
 
     /** Android assets to copy to the game folder */
     protected String[] getAssetsToCopy() {
         return new String[] {
-            "ScriptsNew.rxdata",
+            "GameScripts.rxdata",
         };
     }
 
@@ -48,8 +60,8 @@ public class MKXPActivity extends SDLActivity
     @Override
     protected String[] getLibraries() {
         return new String[] {
-                "openal",
-                "mkxp",
+            "openal",
+            "mkxp",
         };
     }
 
