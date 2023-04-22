@@ -11,7 +11,26 @@ import org.ancurio.button_mapping.VirtualButton;
 
 public class MKXPActivity extends SDLActivity
 {
-    ButtonMappingManager.InputLayout inputLayout;
+    /** Configure this to point to game path */
+    protected String getGameDirectory() {
+        return getFilesDir().getAbsolutePath();
+    }
+
+    /** Configure for RTP assets */
+    protected String[] getRTPPaths() {
+        return new String[] {
+            getObbDir() + "/obb_type_main.2000028.obb",
+            getObbDir() + "/obb_type_patch.2000028.obb",
+            getObbDir() + "/ScriptsNew.zip",
+        };
+    }
+
+    /** Configure for Scripts.rxdata */
+    protected String getScriptsRelativePath() {
+        return "ScriptsNew.rxdata";
+    }
+
+    private ButtonMappingManager.InputLayout inputLayout;
 
     @Override
     protected String[] getLibraries() {
@@ -28,22 +47,6 @@ public class MKXPActivity extends SDLActivity
             String.join(",", this.getRTPPaths()) + ",",
             this.getScriptsRelativePath(),
         };
-    }
-
-    private String getGameDirectory(){
-        return getObbDir().getPath();
-    }
-
-    private String[] getRTPPaths() {
-        return new String[] {
-            getObbDir() + "/obb_type_main.2000028.obb",
-            getObbDir() + "/obb_type_patch.2000028.obb",
-            getObbDir() + "/ScriptsNew.zip",
-        };
-    }
-
-    private String getScriptsRelativePath() {
-        return "ScriptsNew.rxdata";
     }
 
     public void onCreate(Bundle savedInstanceState){
