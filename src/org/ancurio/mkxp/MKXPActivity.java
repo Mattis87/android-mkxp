@@ -24,7 +24,6 @@ public class MKXPActivity extends SDLActivity
     protected String[] getLibraries() {
         return new String[] {
                 "openal",
-                "mkxp_wrapper",
                 "mkxp",
         };
     }

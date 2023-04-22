@@ -9,7 +9,6 @@
 L_PATH := $(call my-dir)
 
 include $(L_PATH)/mkxp.mk
-include $(L_PATH)/mkxp-wrapper/Android.mk
 include $(L_PATH)/physfs.mk
 include $(L_PATH)/libogg.mk
 include $(L_PATH)/pixman.mk
