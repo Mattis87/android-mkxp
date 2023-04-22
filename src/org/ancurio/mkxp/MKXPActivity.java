@@ -1,13 +1,20 @@
 package org.ancurio.mkxp;
+
+import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.libsdl.app.SDLActivity;
 import org.ancurio.button_mapping.ButtonMappingManager;
 import org.ancurio.button_mapping.Helper;
 import org.ancurio.button_mapping.VirtualButton;
+import org.libsdl.app.SDLActivity;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MKXPActivity extends SDLActivity
 {
@@ -21,13 +28,19 @@ public class MKXPActivity extends SDLActivity
         return new String[] {
             getObbDir() + "/obb_type_main.2000028.obb",
             getObbDir() + "/obb_type_patch.2000028.obb",
-            getObbDir() + "/ScriptsNew.zip",
         };
     }
 
     /** Configure for Scripts.rxdata */
     protected String getScriptsRelativePath() {
         return "ScriptsNew.rxdata";
+    }
+
+    /** Android assets to copy to the game folder */
+    protected String[] getAssetsToCopy() {
+        return new String[] {
+            "ScriptsNew.rxdata",
+        };
     }
 
     private ButtonMappingManager.InputLayout inputLayout;
@@ -51,7 +64,12 @@ public class MKXPActivity extends SDLActivity
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        // Initialize the button mapping
         inputLayout = ButtonMappingManager.InputLayout.getDefaultInputLayout(getContext());
+
+        // Copy the assets
+        copyAssets();
     }
 
     @Override
@@ -66,6 +84,16 @@ public class MKXPActivity extends SDLActivity
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    @Override
+    protected boolean onUnhandledMessage(int command, Object param) {
+        switch (command) {
+            case 705:
+                addButtons((int) param == 100 || (int) param == 20);
+                return true;
+        }
+        return super.onUnhandledMessage(command, param);
     }
 
     private void addButtons(boolean drawText) {
@@ -90,13 +118,38 @@ public class MKXPActivity extends SDLActivity
         }
     }
 
-    @Override
-    protected boolean onUnhandledMessage(int command, Object param) {
-        switch (command) {
-            case 705:
-                addButtons((int) param == 100 || (int) param == 20);
-                return true;
+    protected void copyAssets() {
+        AssetManager assetManager = getAssets();
+        for (String asset : getAssetsToCopy()) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(asset);
+                out = new FileOutputStream(getGameDirectory() + "/" + asset);
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + asset, e);
+            }
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+            }
         }
-        return super.onUnhandledMessage(command, param);
     }
 }
