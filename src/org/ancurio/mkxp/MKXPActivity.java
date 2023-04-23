@@ -108,7 +108,7 @@ public class MKXPActivity extends SDLActivity
         super.onCreate(savedInstanceState);
 
         // Initialize the button mapping
-        inputLayout = ButtonMappingManager.InputLayout.getDefaultInputLayout(getContext());
+        inputLayout = ButtonMappingManager.InputLayout.getDefaultInputLayout(this);
 
         // Copy the assets
         copyAssets();
