@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 
 public class MKXPActivity extends SDLActivity
@@ -286,9 +287,10 @@ public class MKXPActivity extends SDLActivity
                     }
 
                     // Write the file
-                    String dest = getGameDirectory() + "/" + filename;
+                    Path dest = Paths.get(getGameDirectory() + "/" + filename);
                     try {
-                        Files.write(Paths.get(dest), data);
+                        Files.write(dest, data);
+                        Files.setLastModifiedTime(dest, FileTime.fromMillis(metadata.getLastModifiedTimestamp()));
                     } catch (IOException e) {
                         Log.e(TAG, "Failed to write file " + filename, e);
                     }
