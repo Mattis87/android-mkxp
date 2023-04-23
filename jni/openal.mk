@@ -127,7 +127,11 @@ LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/openal-soft/common/alstring.cpp \
 	$(LOCAL_PATH)/openal-soft/common/strutils.cpp \
 
-# $(LOCAL_PATH)/core/mixer/mixer_neon.cpp 
+# Add NEON extensions for ARM
+ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+	LOCAL_SRC_FILES += $(LOCAL_PATH)/openal-soft/core/mixer/mixer_neon.cpp 
+	LOCAL_CPPFLAGS += -DHAVE_NEON
+endif
 
 LOCAL_LDLIBS := -llog -lOpenSLES
 include $(BUILD_SHARED_LIBRARY)
