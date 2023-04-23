@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -294,9 +295,10 @@ public class MKXPActivity extends SDLActivity
         for (String asset : getAssetsToCopy()) {
             InputStream in = null;
             try {
-                String dest = getGameDirectory() + "/" + asset;
+                Path dest = Paths.get(getGameDirectory() + "/" + asset);
                 in = assetManager.open(asset);
-                Files.copy(in, Paths.get(dest));
+                Files.deleteIfExists(dest);
+                Files.copy(in, dest);
             } catch(IOException e) {
                 Log.e(TAG, "Failed to copy asset file: " + asset, e);
             } finally {
