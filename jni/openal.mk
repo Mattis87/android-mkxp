@@ -34,9 +34,9 @@ LOCAL_CPPFLAGS += -DMAX_SOURCES_LOW=$(MAX_SOURCES_LOW) \
 				-DRESTRICT= \
 
 LOCAL_C_INCLUDES := \
-	$(LOCAL_PATH) \
-	$(LOCAL_PATH)/include \
-	$(LOCAL_PATH)/common
+	$(LOCAL_PATH)/openal-soft \
+	$(LOCAL_PATH)/openal-soft/include \
+	$(LOCAL_PATH)/openal-soft/common
 
 LOCAL_SRC_FILES := \
 	$(LOCAL_PATH)/openal-soft/al/extension.cpp \
