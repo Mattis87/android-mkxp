@@ -274,6 +274,7 @@ public class MKXPActivity extends SDLActivity
                 snapshotsClient.open(snapshotName, true, SnapshotsClient.RESOLUTION_POLICY_MOST_RECENTLY_MODIFIED).addOnSuccessListener(sres -> {
                     if (sres.isConflict()) {
                         Log.e(TAG, "Conflict for file: " + snapshotName);
+                        return;
                     }
 
                     final Snapshot snapshot = sres.getData();
