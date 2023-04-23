@@ -32,6 +32,11 @@ public class MKXPActivity extends SDLActivity
 {
     private static final String TAG = "mkxp";
 
+    /** Package identifier for save games **/
+    protected String savePackageName() {
+        return getPackageName();
+    }
+
     /** Configure this to point to game path */
     protected String getGameDirectory() {
         return getFilesDir().getAbsolutePath();
@@ -74,7 +79,7 @@ public class MKXPActivity extends SDLActivity
 
     /** Get the snapshot name from a filename (save) */
     protected String getSnapshotName(String filename) {
-        return getPackageName() + "_" + filename;
+        return savePackageName() + "_" + filename;
     }
 
     private ButtonMappingManager.InputLayout inputLayout;
@@ -251,7 +256,7 @@ public class MKXPActivity extends SDLActivity
                 // Split at the underscore
                 String packageName = snapshotName.substring(0, index);
                 String filename = snapshotName.substring(index + 1);
-                if (!packageName.equals(getPackageName())) {
+                if (!packageName.equals(savePackageName())) {
                     continue;
                 }
 
