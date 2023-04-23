@@ -2,7 +2,12 @@ LOCAL_PATH := $(call my-dir)/mkxp
 include $(CLEAR_VARS)
 
 LOCAL_MODULE:= mkxp
-LOCAL_CPPFLAGS:=-DSHARED_FLUID -DGLES2_HEADER -O3 -fexceptions
+LOCAL_CPPFLAGS:= \
+	-DSHARED_FLUID \
+	-DGLES2_HEADER \
+	-DMKXP_EMULATE_TOUCH_MOUSE \
+	-O3 \
+	-fexceptions
 
 ifeq ($(TARGET_ARCH_ABI), armeabi)
 	LOCAL_CPPFLAGS += -DARCH_32BIT
