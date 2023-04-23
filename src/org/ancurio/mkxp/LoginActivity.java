@@ -20,7 +20,6 @@ public class LoginActivity extends Activity {
 
         if (this.isObbMissing()) {
             findViewById(R.id.obbMissing).setVisibility(View.VISIBLE);
-            findViewById(R.id.loginButton).setVisibility(View.GONE);
 
             return;
         }
@@ -49,6 +48,8 @@ public class LoginActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
+            findViewById(R.id.loginButton).setVisibility(View.VISIBLE);
+            findViewById(R.id.loginDesc).setVisibility(View.VISIBLE);
             Toast.makeText(this, "Not signed in to Google Play Games", Toast.LENGTH_SHORT).show();
         }
     }
