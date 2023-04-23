@@ -205,7 +205,7 @@ public class MKXPActivity extends SDLActivity
 
                 // Write the file to the cloud
                 snapshotsClient.open(snapshotName,true).addOnSuccessListener(res -> {
-                    if (res.getData() == null) {
+                    if (res.isConflict() || res.getData() == null) {
                         Log.d(TAG, "Conflict detected for file " + file.getName());
                         return;
                     }
@@ -271,10 +271,9 @@ public class MKXPActivity extends SDLActivity
                 Log.d(TAG, "Loading remote file: " + filename);
 
                 snapshotsClient.open(snapshotName, true).addOnSuccessListener(sres -> {
+                    if (sres.isConflict()) return;
                     final Snapshot snapshot = sres.getData();
-                    if (snapshot == null) {
-                        return;
-                    }
+                    if (snapshot == null) return;
 
                     // Read the file
                     byte[] data = null;
