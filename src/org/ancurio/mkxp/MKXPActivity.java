@@ -80,6 +80,8 @@ public class MKXPActivity extends SDLActivity
     private ButtonMappingManager.InputLayout inputLayout;
     private SnapshotsClient snapshotsClient;
 
+    public static native void nativeExit();
+
     @Override
     protected String[] getLibraries() {
         return new String[] {
@@ -111,6 +113,12 @@ public class MKXPActivity extends SDLActivity
 
         // Load save games
         loadSaveGames();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        nativeExit();
     }
 
     @Override

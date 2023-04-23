@@ -30,6 +30,7 @@ LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/assets
 
 LOCAL_SRC_FILES := \
+	$(LOCAL_PATH)/src/android.cpp \
 	$(LOCAL_PATH)/src/main.cpp \
 	$(LOCAL_PATH)/src/audio.cpp \
 	$(LOCAL_PATH)/src/bitmap.cpp \
