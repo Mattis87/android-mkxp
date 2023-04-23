@@ -205,7 +205,7 @@ public class MKXPActivity extends SDLActivity
                 final String snapshotName = getSnapshotName(file.getName());
 
                 // Write the file to the cloud
-                snapshotsClient.open(snapshotName,true).addOnSuccessListener(res -> {
+                snapshotsClient.open(snapshotName, true, SnapshotsClient.RESOLUTION_POLICY_MOST_RECENTLY_MODIFIED).addOnSuccessListener(res -> {
                     if (res.isConflict() || res.getData() == null) {
                         Log.d(TAG, "Conflict detected for file " + file.getName());
                         return;
@@ -247,7 +247,7 @@ public class MKXPActivity extends SDLActivity
             for (SnapshotMetadata metadata : buffer) {
                 // Get the name of the file
                 String snapshotName = metadata.getUniqueName();
-                
+
                 // Get index of undescore
                 int index = snapshotName.lastIndexOf("_");
                 if (index == -1) {
@@ -271,8 +271,11 @@ public class MKXPActivity extends SDLActivity
                 // Load the remote file to local
                 Log.d(TAG, "Loading remote file: " + filename);
 
-                snapshotsClient.open(snapshotName, true).addOnSuccessListener(sres -> {
-                    if (sres.isConflict()) return;
+                snapshotsClient.open(snapshotName, true, SnapshotsClient.RESOLUTION_POLICY_MOST_RECENTLY_MODIFIED).addOnSuccessListener(sres -> {
+                    if (sres.isConflict()) {
+                        Log.e(TAG, "Conflict for file: " + snapshotName);
+                    }
+
                     final Snapshot snapshot = sres.getData();
                     if (snapshot == null) return;
 
