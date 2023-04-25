@@ -19,7 +19,7 @@ include $(L_PATH)/SDL_sound.mk
 
 include $(L_PATH)/fluidsynth/Android.mk
 include $(L_PATH)/glib/Android.mk
-include $(L_PATH)/libsigc++/Android.mk
+include $(L_PATH)/libsigc++.mk
 include $(L_PATH)/openal.mk
 include $(L_PATH)/ruby/Android.mk
 include $(L_PATH)/libvorbis/Android.mk
