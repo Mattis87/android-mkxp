@@ -3,7 +3,7 @@ include $(CLEAR_VARS)
 
 
 LOCAL_MODULE:= ruby
-LOCAL_CFLAGS:= -DRUBY_EXPORT -pthread -O2
+LOCAL_CFLAGS:= -DRUBY_EXPORT -pthread
 
 ifeq ($(TARGET_ARCH_ABI), armeabi)
 	LOCAL_CFLAGS += -DARCH_32BIT
