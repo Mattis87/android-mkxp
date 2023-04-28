@@ -65,13 +65,16 @@ public class LoginActivity extends Activity {
     }
 
     protected void authCompleteListener(com.google.android.gms.tasks.Task<com.google.android.gms.games.AuthenticationResult> isAuthenticatedTask) {
+        if (isFinishing() || isDestroyed()) return;
+
+        findViewById(R.id.connecting).setVisibility(View.GONE);
+
         boolean isAuthenticated = (isAuthenticatedTask.isSuccessful() && isAuthenticatedTask.getResult().isAuthenticated());
         if (isAuthenticated) {
             if (!isMigrateHidden()) {
                 findViewById(R.id.legacyDesc).setVisibility(View.VISIBLE);
                 findViewById(R.id.migrateButton).setVisibility(View.VISIBLE);
                 findViewById(R.id.migrateHide).setVisibility(View.VISIBLE);
-                findViewById(R.id.startButton).setVisibility(View.VISIBLE);
             } else {
                 startGame();
             }
@@ -89,6 +92,8 @@ public class LoginActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        if (isFinishing() || isDestroyed()) return;
+
         if (requestCode == MIGRATE_INTENT && resultCode == Activity.RESULT_OK) {
             if (resultData == null) return;
 

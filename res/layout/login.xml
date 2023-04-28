@@ -6,11 +6,20 @@
     android:padding="10sp">
 
     <TextView
+        android:id="@+id/connecting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20sp"
+        android:text="Attempting to connect to Google Play games. Please wait ..."
+        android:visibility="visible"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/loginDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="20sp"
-        android:text="Google Play Games is used for storing the save games, so that you can continue your progress on any device. Click the button below to log in."
+        android:text="Google Play Games is used for storing the save games, so that you can continue your progress on any device. You may need to have the Google Play Games app installed. Click the button below to log in."
         android:visibility="gone"
         android:textSize="16sp" />
 
@@ -60,8 +69,8 @@
         android:id="@+id/startButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Game"
-        android:visibility="gone"
+        android:text="Skip and Start Game"
+        android:visibility="visible"
         android:layout_marginTop="20sp"
         android:textSize="16sp" />
 </LinearLayout>
